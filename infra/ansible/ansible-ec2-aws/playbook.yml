@@ -1,0 +1,20 @@
+---
+- name: Install Docker, Git, and Nmap
+  hosts: ec2
+  #become: yes
+
+  tasks:
+    - name: Install Docker
+      shell: |
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+
+    - name: Install Git
+      yum:
+        name: git
+        state: latest
+
+    - name: Install Nmap
+      yum:
+        name: nmap
+        state: latest
