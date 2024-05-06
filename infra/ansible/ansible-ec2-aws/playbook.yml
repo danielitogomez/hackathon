@@ -1,5 +1,5 @@
 ---
-- name: Update, Install Docker, Git, and Nmap, and Run Docker Build Script
+- name: Update, Install Docker, Git, Nmap, and Manage Docker Build Script
   hosts: ec2
   become: yes
 
@@ -24,7 +24,7 @@
       user:
         name: ec2-user
         groups: docker
-        append: yes  # This ensures ec2-user is added to the docker group without removing them from other groups
+        append: yes
 
     - name: Install Git
       yum:
@@ -36,8 +36,19 @@
         name: nmap
         state: latest
 
+    - name: Ensure the repository is present and up to date
+      git:
+        repo: 'https://github.com/danielitogomez/hackathon.git'
+        dest: /home/ec2-user/hackathon
+        version: main
+        clone: yes
+        update: yes
+      become_user: ec2-user
+      register: git_result
+
     - name: Execute Docker build and run script
-      command: /bin/bash /home/danijarvis/github/hackathon/linux-challenges/build-dockerfile.sh
+      command: /bin/bash build-dockerfile.sh
       become_user: ec2-user
       args:
-        chdir: /home/danijarvis/github/hackathon/linux-challenges
+        chdir: /home/ec2-user/hackathon/build  # Ensure this is the correct path
+      when: git_result.changed
