@@ -41,20 +41,14 @@ jobs:
         sudo apt-get update
         sudo apt-get install ansible -y
 
-    - name: Start SSH Agent
+    - name: Run Ansible Playbook
       run: |
         eval "$(ssh-agent -s)"
         ssh-add <(echo "${{ secrets.SSH_PRIVATE_KEY }}")
-
-    - name: Disable SSH Host Key Checking
-      run: |
         mkdir -p ~/.ssh
         echo "Host *
               StrictHostKeyChecking no
               UserKnownHostsFile=/dev/null" > ~/.ssh/config
         chmod 644 ~/.ssh/config
-
-    - name: Run Ansible Playbook
-      run: |
         cd infra/ansible/ansible-ec2-aws
         ansible-playbook -i inventory playbook.yml
