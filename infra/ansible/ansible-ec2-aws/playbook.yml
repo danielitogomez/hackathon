@@ -43,6 +43,7 @@
         version: main
         clone: yes
         update: yes
+        force: yes
       become_user: ec2-user
       register: git_result
 

@@ -2,7 +2,7 @@
 FROM ubuntu:latest
 
 # Installing packages
-RUN apt update && apt install -y openssh-server sudo net-tools nmap vim tar
+RUN apt update && apt install -y openssh-server sudo net-tools vim tar
 
 # Copy files to container
 WORKDIR /linux-challenges
