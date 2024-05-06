@@ -11,8 +11,8 @@ COPY linux-challenges .
 
 # Adding user
 RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 student
-RUN  echo 'student:Ch4ngm3!' | chpasswd
-RUN  passwd --expire student
+RUN echo 'student:Ch4ngm3!' | chpasswd
+RUN passwd --expire student
 
 # linux-challanges-n2
 RUN shuf -i 0-999 >> /tmp/find.txt && echo "565656" >> /tmp/find.txt
