@@ -1,0 +1,26 @@
+##########################################
+###        Linux-challenges N2         ###
+##########################################
+
+1. Go to see what kind of OS do you have installed in your system.
+2. Go to install htop package.
+3. Go to see how many cpu, memory, I/O you have in your system.
+4. How much memory RAM do you have?
+5. Show your user in your shell.
+6. Show your hostname in your shell.
+7. Show your print working directory.
+8. Find a file called find.txt with the string "565656" in the system (CTF)
+9. Show only that string.
+10. When you find the file, please show how may lines have inside.
+11. Compress the file that you find.
+12. Create a directory compress-dir.
+13. mv the compress file into the compress-dir.
+14. Run the script username-password.sh
+15. Show in console the username and password.
+16. Show only the username in console.
+17. Show only the password in console.
+18. Convert to base64 the username:password
+19. Create a directory called store
+20. Create a file called permission.txt
+21. Change the permission to be more permissive as possible.
+22. Delete the directory called store.

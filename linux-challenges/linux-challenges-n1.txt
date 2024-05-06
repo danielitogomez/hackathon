@@ -1,0 +1,17 @@
+##########################################
+###        Linux-challenges N1         ###
+##########################################
+
+1. Create a file called file0.txt
+2. Create a directory called dir
+3. Copy the file called file0.txt into directory called dir
+4. Go to directory called dir and delete the file called file0.txt
+5. Go back and move the file called file0.txt into directory dir
+6. Show that the file called file0.txt is already into the directory called dir
+7. Make a input string called test into the file called file0.txt
+8. Show in console the output.
+9. Run the shell script called for-loop.sh
+10. Show the output from file1.txt
+11. Show in output only the string cybersecurity.
+12. Run this bash script called random.sh and go to the file generated called file2.txt
+13. You will need to sort the output for numbers and you will need to delete the replicate inputs in the file2.txt

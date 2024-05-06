@@ -1,5 +1,5 @@
 [ec2]
-your_ec2_public_ip ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/id_rsa
+44.203.230.194 ansible_user=ec2-user ansible_ssh_private_key_file=/home/danijarvis/.ssh/hackathon_poc
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3

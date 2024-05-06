@@ -1,0 +1,31 @@
+##########################################
+###        Linux-challenges N3         ###
+##########################################
+
+1. In /tmp/ directory try to list all files.
+2. Do you notice something strange in one file? Ex. Some special character
+3. There are a file there that contain a string with user and password try to see what it is?
+4. Notice that the user and password need to be in text plane, try to show in console.
+5. Create a new file called ctf.txt.
+6. Store the user and password that you show before in 4. challenge inside the cft.txt file.
+6. Create a directory called CTF.
+7. Move the ctf.txt file to the directory CTF.
+8. Show in console the ctf.txt string.
+9. Show in console only the user nothing else.
+10. Show in console only the password nothing else.
+11. Move the string user to a file called user.txt inside diectory CTF.
+12. Move the string password to a file called password.txt inside directory CTF.
+13. Compress directory CTF.
+14. Try to find a file called challenge3.txt
+15. Go to that location of this file located.
+16. Count how many lines have this file challenge3.txt and show it in console.
+17. Show in console only the user and password iatek uvuvwevwevwe
+18. Encode the user:password to base64
+19. Redirect the output of that base64 to a file called iatek.txt
+20. Decode to plane text again from the file iatek.txt
+21. In /tmp/ directory there are a file called that have this string "hidden file to make more interesting the learning" try to find it.
+22. Show in console the string previos.
+23. Redirect only the word hard to the file that your are going to call hard.txt
+24. Show the file hard.txt, it will show you hard as string.
+25. Replace the word hard for HARD. Please don't use any editor or redirections, only use a command in linux to replace strings.
+26. Try to get a user and password that is store in /files/challenge3 but the only that we know is that the first to letters of the user is la.

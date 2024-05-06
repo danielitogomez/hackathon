@@ -1,13 +1,30 @@
 ---
-- name: Install Docker, Git, and Nmap
+- name: Update, Install Docker, Git, and Nmap, and Run Docker Build Script
   hosts: ec2
-  #become: yes
+  become: yes
 
   tasks:
+    - name: Update all packages
+      yum:
+        name: '*'
+        state: latest
+
     - name: Install Docker
-      shell: |
-        curl -fsSL https://get.docker.com -o get-docker.sh
-        sh get-docker.sh
+      yum:
+        name: docker-io
+        state: latest
+
+    - name: Start and enable Docker service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add ec2-user to Docker group
+      user:
+        name: ec2-user
+        groups: docker
+        append: yes  # This ensures ec2-user is added to the docker group without removing them from other groups
 
     - name: Install Git
       yum:
@@ -18,3 +35,9 @@
       yum:
         name: nmap
         state: latest
+
+    - name: Execute Docker build and run script
+      command: /bin/bash /home/danijarvis/github/hackathon/linux-challenges/build-dockerfile.sh
+      become_user: ec2-user
+      args:
+        chdir: /home/danijarvis/github/hackathon/linux-challenges
