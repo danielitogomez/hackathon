@@ -30,9 +30,9 @@ jobs:
     - name: Terraform Init and Apply
       run: |
         cd hackathon/infra/terraform/terraform-ec2-aws
-        terraform init
-        terraform plan
-        terraform apply -auto-approve
+    #    terraform init
+    #    terraform plan
+    #    terraform apply -auto-approve
     
     - name: List directory structure
       run: ls -R
