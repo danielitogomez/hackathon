@@ -27,7 +27,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Terraform Init and Apply
+    - name: Terraform Init Plan and Apply
       env:
         TF_VAR_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
       run: |
@@ -36,10 +36,12 @@ jobs:
         terraform plan -var="public_key=${{ env.TF_VAR_public_key }}"
         terraform apply -auto-approve -var="public_key=${{ env.TF_VAR_public_key }}"
 
-#    - name: Install Ansible and Configure Infrastructure
-#      run: |
-#        sudo apt-get update
-#        sudo apt-get install ansible -y
-#        cd hackathon/infra/ansible/ansible-ec2-aws
-#        ansible-playbook -i inventory playbook.yml
-
+    - name: Install Ansible and Configure Infrastructure
+      run: |
+        sudo apt-get update
+        sudo apt-get install ansible -y
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H your-server-ip >> ~/.ssh/known_hosts
+        cd infra/ansible/ansible-ec2-aws
+        ansible-playbook -i inventory playbook.yml
