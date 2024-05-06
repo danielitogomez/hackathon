@@ -36,12 +36,25 @@ jobs:
         terraform plan -var="public_key=${{ env.TF_VAR_public_key }}"
         terraform apply -auto-approve -var="public_key=${{ env.TF_VAR_public_key }}"
 
-    - name: Install Ansible and Configure Infrastructure
+    - name: Install Ansible
       run: |
         sudo apt-get update
         sudo apt-get install ansible -y
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H your-server-ip >> ~/.ssh/known_hosts
+
+    - name: Start SSH Agent
+      run: |
+        eval "$(ssh-agent -s)"
+        ssh-add <(echo "${{ secrets.SSH_PRIVATE_KEY }}")
+
+    - name: Disable SSH Host Key Checking
+      run: |
+        mkdir -p ~/.ssh
+        echo "Host *
+              StrictHostKeyChecking no
+              UserKnownHostsFile=/dev/null" > ~/.ssh/config
+        chmod 644 ~/.ssh/config
+
+    - name: Run Ansible Playbook
+      run: |
         cd infra/ansible/ansible-ec2-aws
         ansible-playbook -i inventory playbook.yml
