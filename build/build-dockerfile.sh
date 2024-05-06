@@ -11,7 +11,7 @@ IMAGE="ssh-server-container-dockerfile"
 
 function image_build() {
 
-    docker build . -t $IMAGE
+    sudo docker build . -t $IMAGE
 
 }
 
