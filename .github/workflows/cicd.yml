@@ -29,13 +29,14 @@ jobs:
 
     - name: Terraform Init and Apply
       run: |
-        cd hackathon/infra/terraform/terraform-ec2-aws
+        cd infra/terraform/terraform-ec2-aws
+        ls -alh
     #    terraform init
     #    terraform plan
     #    terraform apply -auto-approve
     
-    - name: List directory structure
-      run: ls -R
+    #- name: List directory structure
+    #  run: ls -R
 
 #    - name: Install Ansible and Configure Infrastructure
 #      run: |
