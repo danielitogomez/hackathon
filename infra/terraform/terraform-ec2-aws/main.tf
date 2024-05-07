@@ -1,6 +1,16 @@
+terraform {
+  backend "s3" {
+    bucket         = "terraform-s3-state-hackathon"
+    key            = "my-terraform-project/terraform.tfstate"
+    region         = "us-east-1"
+    shared_credentials_file = "/home/danijarvis/.aws/credentials"
+  }
+}
+
+
 resource "aws_vpc" "hackathon" {
-  cidr_block = var.vpc_cidr
-  enable_dns_support = true
+  cidr_block           = var.vpc_cidr
+  enable_dns_support   = true
   enable_dns_hostnames = true
   tags = {
     Name = "hackathon-vpc"
@@ -83,11 +93,11 @@ resource "aws_security_group" "hackathon" {
 }
 
 resource "aws_instance" "hackathon" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-  subnet_id     = aws_subnet.hackathon.id
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  subnet_id              = aws_subnet.hackathon.id
   vpc_security_group_ids = [aws_security_group.hackathon.id]
-  key_name      = aws_key_pair.deployer.key_name
+  key_name               = aws_key_pair.deployer.key_name
 
   tags = {
     Name = "hackathonInstance"
@@ -95,7 +105,7 @@ resource "aws_instance" "hackathon" {
 }
 
 resource "aws_key_pair" "deployer" {
-  key_name   = "deployer-key"
+  key_name = "deployer-key"
   #public_key = file(var.public_key)
   public_key = var.public_key
 }
