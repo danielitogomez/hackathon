@@ -34,7 +34,7 @@ jobs:
         cd infra/terraform/terraform-ec2-aws
         terraform init
         terraform plan -var="public_key=${{ env.TF_VAR_public_key }}"
-        terraform apply -auto-approve -var="public_key=${{ env.TF_VAR_public_key }}"
+        #terraform apply -auto-approve -var="public_key=${{ env.TF_VAR_public_key }}"
 
     - name: Commit Terraform State
       run: |
@@ -42,7 +42,17 @@ jobs:
         git config --global user.email 'actions@github.com'
         git add infra/terraform/terraform-ec2-aws/terraform.tfstate
         git commit -m "Update Terraform state file" || echo "No changes to commit"
-        git push https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/danielitogomez/hackathon.git HEAD:main
+        # Ensure the token is being used properly in the URL
+        git remote set-url origin https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/danielitogomez/hackathon.git
+        git push origin HEAD:main
+
+    - name: Debug token usage
+      run: |
+        if [ -z "${{ secrets.PERSONAL_ACCESS_TOKEN }}" ]; then
+          echo "Token is empty"
+        else
+          echo "Token is present"
+        fi
 
     - name: Install Ansible
       run: |
