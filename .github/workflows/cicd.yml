@@ -36,6 +36,14 @@ jobs:
         terraform plan -var="public_key=${{ env.TF_VAR_public_key }}"
         terraform apply -auto-approve -var="public_key=${{ env.TF_VAR_public_key }}"
 
+    - name: Commit Terraform State
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add infra/terraform/terraform-ec2-aws/terraform.tfstate
+        git commit -m "Update Terraform state file"
+        git push
+
     - name: Install Ansible
       run: |
         sudo apt-get update
