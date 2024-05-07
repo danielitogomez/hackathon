@@ -36,6 +36,14 @@ jobs:
         terraform plan -var="public_key=${{ env.TF_VAR_public_key }}"
         #terraform apply -auto-approve -var="public_key=${{ env.TF_VAR_public_key }}"
 
+    - name: Debug token usage
+      run: |
+        if [ -z "${{ secrets.PERSONAL_ACCESS_TOKEN }}" ]; then
+          echo "Token is empty"
+        else
+          echo "Token is present"
+        fi
+
     - name: Commit Terraform State
       run: |
         git config --global user.name 'GitHub Actions'
@@ -45,14 +53,6 @@ jobs:
         # Ensure the token is being used properly in the URL
         git remote set-url origin https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/danielitogomez/hackathon.git
         git push origin HEAD:main
-
-    - name: Debug token usage
-      run: |
-        if [ -z "${{ secrets.PERSONAL_ACCESS_TOKEN }}" ]; then
-          echo "Token is empty"
-        else
-          echo "Token is present"
-        fi
 
     - name: Install Ansible
       run: |
