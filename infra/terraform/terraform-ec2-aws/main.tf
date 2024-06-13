@@ -1,11 +1,12 @@
-terraform {
-  backend "s3" {
-    bucket         = "terraform-s3-state-hackathon"
-    key            = "my-terraform-project/terraform.tfstate"
-    region         = "us-east-1"
-    shared_credentials_file = "/home/danijarvis/.aws/credentials"
-  }
-}
+# backend remote bucket for the tfstate
+#terraform {
+#  backend "s3" {
+#    bucket                  = "terraform-s3-state-hackathon"
+#    key                     = "my-terraform-project/terraform.tfstate"
+#    region                  = "us-east-1"
+#    shared_credentials_file = "/home/dani/.aws/credentials"
+#  }
+#}
 
 
 resource "aws_vpc" "hackathon" {
@@ -69,13 +70,6 @@ resource "aws_security_group" "hackathon" {
   ingress {
     from_port   = 2222
     to_port     = 2222
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 4000
-    to_port     = 4000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

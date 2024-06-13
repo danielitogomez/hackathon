@@ -25,8 +25,8 @@ variable "subnet_cidr" {
 
 variable "public_key" {
   description = "The path to the public key to be used for SSH access to the instance."
-  #default     = "/home/danijarvis/.ssh/hackathon_poc.pub"
-  default = ""
+  default     = "/home/dani/.ssh/hackathon_poc.pub"
+  #default = ""
 }
 
 # Update this variable with the AMI ID for Ubuntu
